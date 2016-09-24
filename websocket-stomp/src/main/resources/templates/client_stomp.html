@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Title</title>
+        <script src="../../webjars/jquery/3.1.0/jquery.min.js"></script>
+        <script src="../../webjars/sockjs-client/1.0.2/sockjs.min.js"></script>
+        <script src="../../webjars/stomp-websocket/2.3.3/stomp.min.js"></script>
+
+
+    <script type="text/javascript">
+        var stompClient = null;
+
+        function setConnected(connected) {
+            document.getElementById('connect').disabled = connected;
+            document.getElementById('disconnect').disabled = !connected;
+            document.getElementById('response').innerHTML = '';
+        }
+
+        function connect() {
+            var socket = new SockJS("/ws");
+            stompClient = Stomp.over(socket);
+            stompClient.connect({}, function(frame) {
+                setConnected(true);
+                showGreeting("Connected");
+
+                stompClient.subscribe('/queue/notify', function(greeting){
+                    showGreeting(greeting.body);
+                });
+
+                stompClient.subscribe('/user/queue/notify', function(greeting){
+                    showGreeting(greeting.body);
+                });
+
+            });
+        }
+
+        function testAjax() {
+
+            stompClient.subscribe('/app/string', function(greeting){
+                showGreeting(greeting.body);
+            });
+
+        }
+        function disconnect() {
+            if (stompClient != null) {
+                stompClient.disconnect();
+            }
+            setConnected(false);
+            console.log("Disconnected");
+        }
+
+        function sendName() {
+            var name = "jtduan";
+            stompClient.send("/app/anystring", {},name);
+        }
+
+        function showGreeting(message) {
+            var response = document.getElementById('response');
+            var p = document.createElement('p');
+            p.style.wordWrap = 'break-word';
+            p.appendChild(document.createTextNode(message));
+            response.appendChild(p);
+        }
+
+        function sendOne() {
+            var sessionid = $("#sessionid").val();
+            $.get("/one/"+sessionid);
+        }
+
+        function sendAll() {
+            $.get("/all");
+        }
+
+
+        /**
+         * Init operations.
+         */
+        $(document).ready(function() {
+            showGreeting("click connect to start...");
+        });
+    </script>
+</head>
+<body>
+<p>your sessionid is :<span th:text = "${session.sessionid}"></span></p>
+<button id= "connect"  onclick="connect();">connect</button>
+<button id= "disconnect"  onclick="disconnect();">disconnect</button>
+<button onclick="sendName();">click here to send demo message and receive response</button>
+<p>====</p>
+<div>
+    input other's session_id:
+    <input id ="sessionid"></input>
+    <button onclick="sendOne();">custom send</button>
+</div>
+<p>====</p>
+<div>
+    <button onclick="sendAll();">boardcast</button>
+</div>
+<p>====</p>
+<div>
+    <button onclick="testAjax();">click here to receive response</button>
+</div>
+
+<div id ="response"></div>
+</body>
+</html>

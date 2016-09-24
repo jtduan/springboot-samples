@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <script src="../../webjars/jquery/3.1.0/jquery.min.js"></script>
+    <script src="../../webjars/sockjs-client/1.0.2/sockjs.min.js"></script>
+</head>
+
+<body>
+<p>your sessionid is :<span th:text = "${session.sessionid}"></span></p>
+
+<script>
+
+    function connect() {
+        var websocket;
+        websocket = new SockJS("/sockjs/webSocketServer");
+        websocket.onopen = function (msg) {
+        };
+        websocket.onmessage = function (msg) {
+            showGreeting(msg.data);
+        };
+        websocket.onerror = function (msg) {
+        };
+        websocket.onclose = function (msg) {
+        }
+    }
+
+    function showGreeting(message) {
+        var response = document.getElementById('response');
+        var p = document.createElement('p');
+        p.style.wordWrap = 'break-word';
+        p.appendChild(document.createTextNode(message));
+        response.appendChild(p);
+    }
+    /**
+     * Init operations.
+     */
+    $(document).ready(function() {
+        connect();
+    });
+
+    function sendOne() {
+        var sessionid = $("#sessionid").val();
+        $.get("/one/"+sessionid);
+    }
+
+    function sendAll() {
+        $.get("/all");
+    }
+
+</script>
+<div>
+    input other's session_id:
+    <input id ="sessionid"></input>
+    <button onclick="sendOne();">custom send</button>
+</div>
+<div>
+    <button onclick="sendAll();">boardcast</button>
+</div>
+<br />
+<hr />
+
+<p>
+    Notifications received on the web socket channel will be displayed below:
+</p>
+<div id ="response"></div>
+</body>
+
+</html>
