@@ -1,32 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cn.jtduan.demo</groupId>
-    <artifactId>springboot-samples</artifactId>
+    <artifactId>quartz</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <modules>
-        <module>websocket</module>
-        <module>quartz</module>
-    </modules>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
 
-    <name>rest</name>
-    <description>Demo project for Spring Boot</description>
-
-    <repositories>
-        <repository>
-            <id>repo-mirror</id>
-            <url>http://uk.maven.org/maven2//</url>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>plugin-repo-mirror</id>
-            <url>http://uk.maven.org/maven2/</url>
-        </pluginRepository>
-    </pluginRepositories>
+    <name>websocket-stomp</name>
+    <description>demo of websocket of stomp</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -42,19 +26,20 @@
     </properties>
 
     <dependencies>
-
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>2.2.3</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
+            <artifactId>spring-tx</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <groupId>cn.jtduan.demo</groupId>
+            <artifactId>springboot-samples</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
 
     </dependencies>
