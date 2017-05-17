@@ -4,19 +4,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>cn.jtduan.demo</groupId>
     <artifactId>websocket</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>websocket-stomp</name>
+    <name>websocket</name>
     <description>demo of websocket of stomp</description>
 
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.4.0.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <groupId>cn.jtduan.boot</groupId>
+        <artifactId>samples</artifactId>
+        <version>1.0-SNAPSHOT</version>
     </parent>
 
     <properties>
@@ -69,8 +67,8 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>cn.jtduan.demo</groupId>
-            <artifactId>springboot-samples</artifactId>
+            <groupId>cn.jtduan.boot</groupId>
+            <artifactId>util</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 

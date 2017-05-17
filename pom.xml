@@ -3,30 +3,20 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>cn.jtduan.demo</groupId>
-    <artifactId>springboot-samples</artifactId>
+    <groupId>cn.jtduan.boot</groupId>
+    <artifactId>samples</artifactId>
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>websocket</module>
+        <module>websocket-stomp</module>
         <module>quartz</module>
+        <module>util</module>
+        <module>auth</module>
     </modules>
     <packaging>pom</packaging>
 
-    <name>rest</name>
+    <name>samples</name>
     <description>Demo project for Spring Boot</description>
-
-    <repositories>
-        <repository>
-            <id>repo-mirror</id>
-            <url>http://uk.maven.org/maven2//</url>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>plugin-repo-mirror</id>
-            <url>http://uk.maven.org/maven2/</url>
-        </pluginRepository>
-    </pluginRepositories>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -52,22 +42,7 @@
             <artifactId>spring-context-support</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-
     </dependencies>
-
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
 
 </project>
